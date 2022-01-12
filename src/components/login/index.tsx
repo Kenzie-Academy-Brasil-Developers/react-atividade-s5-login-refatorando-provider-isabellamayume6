@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "../../Providers/Auth";
 import "./styles.css";
-interface UserData {
+interface userData {
   email: string;
   password: string;
 }
@@ -11,17 +11,17 @@ interface UserData {
 const Login = () => {
   const { signIn } = useAuth();
   const schema = yup.object().shape({
-    email: yup.string().required("email obrigatório"),
+    email: yup.string().required("email obrigatório").email("e-mail inválido"),
     password: yup.string().required("Senha obrigatória"),
   });
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<UserData>({
+  } = useForm<userData>({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data: UserData) => {
+  const onSubmit = (data: userData) => {
     signIn(data);
   };
 

@@ -30,8 +30,9 @@ export const AuthProvider = ({ children }: AuthProps) => {
         localStorage.setItem("token", response.data.token);
         setAuthToken(response.data.token);
         history.push("/dashboard");
+        console.log(userData);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err, userData));
   };
 
   const Logout = () => {
